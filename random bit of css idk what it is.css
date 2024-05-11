@@ -1,0 +1,93 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: red; 
+    margin: 0;
+    padding: 0;  
+    height: 100%; 
+}
+
+
+\\ Menu
+
+.menu_bar {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 5vh;
+    background-color: black;
+
+}
+
+\\ Header
+
+header {
+    background-color: blue;
+    margin-top: 10vh;
+    width: 100%;
+    height: 90vh;
+}
+
+\\ Poetry
+
+article {
+    background-color: blue;
+    margin-top: 10vh;
+    
+    width: 100%;
+    height: 90vh;
+
+}
+
+#scroll {
+    visibility: hidden;
+}
+
+@font-face {
+    font-family: 'Caligraphy'; /*a name to be used later*/
+    src: url('caligraphy.ttf'); /*URL to font*/
+}
+
+.poem_menu {
+    width: 10%;
+    float:left;
+    height: 90vh;
+    background-color: violet;
+
+}
+
+.poem_options {
+    display:flex;
+    width:100%;
+    height: 20vh;
+    background:none;
+    border-radius: 0%;
+    border:0;
+    padding:0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2em;
+}
+
+.poem_options:hover {
+    background-color: darkblue;
+}
+
+#paper {
+    float:right;
+    background-color: #fffff0;
+    width: 90%;
+    height: 90vh;
+
+    font-family: Caligraphy;
+    line-height: 0.5;
+    font-size: 1.8em;
+    overflow:scroll;
+    text-align: center;
+}
