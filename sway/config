@@ -1,0 +1,34 @@
+# Load defaults
+include /etc/sway/config.d
+
+output * bg ~/wallpaper.png fill
+
+output eDP-1 {
+    scale 1.0
+}
+input type:keyboard {
+    xkb_layout "gb"
+}
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    drag_lock disabled
+}
+# Keybind
+include scripts/keybinds
+# Bar
+bar {
+    position top
+    font Cantarell Demi-Bold Light 10
+
+    status_command ~/.config/sway/scripts/bar
+    colors {
+        statusline #ffffff
+        background #000000
+        # 323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+

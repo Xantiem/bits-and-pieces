@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Start the Blueman applet (background tray icon)
+if ! pgrep -x blueman-applet > /dev/null; then
+    blueman-applet &
+fi
+
+# Launch Blueman manager (GUI to manage devices)
+blueman-manager &

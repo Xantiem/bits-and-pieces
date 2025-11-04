@@ -1,0 +1,66 @@
+﻿#!/usr/bin/env bash
+
+BACKLIGHT="/sys/class/backlight/intel_backlight"
+BAT_CAP="/sys/class/power_supply/BAT0/capacity"
+BAT_STAT="/sys/class/power_supply/BAT0/status"
+
+# Function to get brightness
+get_brightness() {
+    if [[ -r "$BACKLIGHT/brightness" && -r "$BACKLIGHT/max_brightness" ]]; then
+        local current=$(<"$BACKLIGHT/brightness")
+        local max=$(<"$BACKLIGHT/max_brightness")
+        echo $(( 100 * current / max ))
+    else
+        echo "N/A"
+    fi
+}
+
+# Function to get battery info
+get_battery() {
+    local cap stat
+    cap=$(cat "$BAT_CAP" 2>/dev/null || echo "N/A")
+    stat=$(cat "$BAT_STAT" 2>/dev/null || echo "Unknown")
+
+    case "$stat" in
+        Charging) icon="⚡" ;;
+        Discharging) icon="🔋" ;;
+        *) icon="🔌" ;;
+    esac
+
+    echo "${icon}${cap}%"
+}
+
+# Function to get wifi status
+get_wifi() {
+    local ssid
+    ssid=$(nmcli -t -f ACTIVE,SSID dev wifi | grep '^yes' | cut -d: -f2)
+    if [ -n "$ssid" ]; then
+        echo "ᯤ ${ssid}"
+    else
+        echo "🚫 Not Connected"
+    fi
+}
+
+# Print the full line
+print_status() {
+    local bright wifi bat datetime
+    bright=$(get_brightness)
+    wifi=$(get_wifi)
+    bat=$(get_battery)
+    datetime=$(date +'%a %Y-%m-%d %H:%M')
+
+    echo "🔆${bright}% | ${wifi} | ${bat} | ${datetime}"
+}
+
+# Main loop
+while true; do
+    print_status
+    sleep 20
+done&
+
+while true; do
+    print_status
+    inotifywait -t 10 -e close_write "$BACKLIGHT/brightness" "$BAT_CAP" "$BAT_STAT" >/dev/null 2>&1
+done
+
+

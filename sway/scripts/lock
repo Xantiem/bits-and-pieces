@@ -1,0 +1,4 @@
+#!/bin/bash
+swaylock -i "~/wallpaper.png" -f &
+sleep 1
+systemctl suspend
