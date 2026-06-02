@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <script src="script.js"></script>
+
+        <style>
+            html, body {
+                height: 100%;
+            }
+        </style>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark">
+            <div class="container-fluid row">
+
+                <style>
+                    .nav-link {
+                        text-align: center;
+                    }
+                </style>
+                
+                <img src="dragon-removebg.png" alt="Dragon Image" class="navbar-brand col-sm-1" onclick="goBack();">
+
+                <ul class="navbar-nav col-sm-11 row">
+
+                    <li class="nav-item col-sm-3">
+                        <a class="nav-link" href="https://github.com/Xantiem">Github</a>
+                    </li>
+                    <li class="nav-item col-sm-3">
+                        <a class="nav-link" href="#">Dead Link 1</a>
+                    </li>
+                    <li class="nav-item col-sm-3">
+                        <a class="nav-link" href="#">Dead Link 2</a>
+                    </li>
+                    <li class="nav-item col-sm-3">
+                        <a class="nav-link" href="#">Dead Link 3</a>
+                    </li>
+                </ul>
+
+            
+            </div>
+          </nav>
+        <h1><a href="formulary.html">Corporate Finance Calculator</a></h1>
+        <h1><a href="macro/index.html">Macro Terminology Glossary</a></h1>
+        <img src="cown.webp" style="width: 40%;">
+
+
+        <style>
+            .biscuits {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                
+            }
+        </style>
+
+        <div class="biscuits container-fluid bg-primary text-white py-4" id="biscuits">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="fs-4 text-info"><b>This site uses biscuits 🍪</b></p>
+                    <p class="fs-6">(Accept the Britishness into your life)</p>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center justify-content-center">
+                    <button type="button" class="btn btn-warning me-2" onclick="declined();">Decline 🇬🇧</button>
+                    <button type="button" class="btn btn-success" onclick="goAway()">Accept the Biscuit</button>
+                </div>
+            </div>
+        </div>
+        <script> if (document.cookie === "goaway=True") document.getElementById('biscuits').remove();</script>
+
+    </body>
+
+</html>

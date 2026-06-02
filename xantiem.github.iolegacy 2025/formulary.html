@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <label for="options">Choose an option:</label>
+    <select id="options" name="options">
+        <option value="none" selected>Please select</option>
+        <option value="FVIF">[FVIF] Future Value Index Factor</option>
+        <option value="PVIF">[PVIF] Present Value Index Factor</option>
+        <option value="FVIFA">[FVIFA] Future Value of an Annuity Interest Factor</option>
+        <option value="PVIFA">[PVIFA] Present of an Annuity Interest Factor</option>
+    </select>
+
+    <form>
+        <label>I%:</label>
+        <input type="text" pattern="[0-9]*" id="percentage" name="textInput" placeholder="I (%)">
+        <label>N Years:</label>
+        <input type="text" pattern="[0-9]*" id="n_years" name="textInput" placeholder="N (years)">
+        <input type="button" value="Go" id="submit">
+    </form>
+    <p>Entered <span id="value_function">values</span> for <span id="value_percentage">I</span>% at <span id="value_n_years">N</span> years<strong id="value_answer"></strong></p>
+    <p id="error" style="color: red;"></p>
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            var selected_function = document.getElementById('options').value;x
+            var selected_percentage = Number(document.getElementById('percentage').value);
+            var selected_years = Number(document.getElementById('n_years').value);
+
+            console.log('Selected option:', selected_function);
+            console.log('Selected Percentage:', selected_percentage);
+            console.log('Selected Percentage:', selected_years);
+
+
+
+            if (selected_function !== 'none' && !isNaN(selected_percentage) && !isNaN(selected_years)) {
+                console.log('conditions met');
+                document.getElementById('error').innerHTML = '';
+
+                document.getElementById('value_function').textContent = selected_function;
+                document.getElementById('value_percentage').textContent = selected_percentage;
+                document.getElementById('value_n_years').textContent = selected_years;
+
+                if (selected_function === 'FVIF') {
+                    var ans = ((1 + (selected_percentage/100))**selected_years).toFixed(3);
+                    document.getElementById('value_answer').innerHTML = ': '+ans;
+                }
+                else if (selected_function === 'PVIF') {
+                    var ans = (1/((1 + (selected_percentage/100))**selected_years)).toFixed(3);
+                    document.getElementById('value_answer').innerHTML = ': '+ans;
+                }
+                else if (selected_function === 'FVIFA') {
+                    var ans = ((((1 + (selected_percentage/100))**selected_years)-1)/(selected_percentage/100)).toFixed(3);
+                    document.getElementById('value_answer').innerHTML = ': '+ans;
+                }
+                else if (selected_function === 'PVIFA') {
+                    //var ans = (1-((1/((1 + (selected_percentage/100))**selected_years)))/(selected_percentage/100)).toFixed(3);
+                    var ans = ((1 - (1/((1 + (selected_percentage / 100)) ** selected_years))) / (selected_percentage / 100)).toFixed(3);
+                    document.getElementById('value_answer').innerHTML = ': '+ans;
+                }
+
+
+            }
+            else {
+                document.getElementById('error').textContent = 'Error recheck values';
+            }
+        })
+    </script>
+    <small style="position: fixed; bottom: 0; left: 0; width: 100%; text-align: center; background-color: #f0f0f0; padding: 10px; margin: 0;">Special thanks to Ştefan for supporting development of this project (emotionally)</small>
+</body>
+</html>
